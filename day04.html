@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>커뮤니케이션 스킬 04 — 부서 간 협업·조율</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  }
+
+  .stage {
+    position: relative;
+    width: min(100vw, calc(100vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    --s: calc(min(100vw, calc(100vh * 16 / 9)) / 80);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* ── Left panel ── */
+  .left-panel {
+    width: 38%;
+    background: linear-gradient(155deg, #0d3b3e 0%, #0f766e 60%, #14b8a6 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6% 5% 6% 6%;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+  .left-panel::before {
+    content: '';
+    position: absolute;
+    right: -30%; top: -20%;
+    width: 70%; height: 70%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .left-panel::after {
+    content: '';
+    position: absolute;
+    right: -10%; bottom: -15%;
+    width: 50%; height: 50%;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .page-num {
+    font-size: calc(var(--s) * 0.85);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  .category {
+    font-size: calc(var(--s) * 1);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: calc(var(--s) * 0.8);
+    position: relative; z-index: 1;
+  }
+  .divider {
+    width: 48px; height: 4px;
+    border-radius: 2px;
+    background: #5eead4;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  h1 {
+    font-size: calc(var(--s) * 2.6);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: calc(var(--s) * 1.4);
+    position: relative; z-index: 1;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent {
+    display: block;
+    font-size: calc(var(--s) * 3.4);
+    color: #5eead4;
+  }
+  .subtitle {
+    font-size: calc(var(--s) * 1.15);
+    line-height: 1.65;
+    opacity: 0.82;
+    position: relative; z-index: 1;
+    font-weight: 400;
+  }
+
+  /* ── Right panel ── */
+  .right-panel {
+    flex: 1;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 5.5% 4% 5%;
+    gap: 3%;
+  }
+
+  .card {
+    background: white;
+    border-radius: calc(var(--s) * 0.6);
+    padding: calc(var(--s) * 1.1) calc(var(--s) * 1.4);
+    display: flex;
+    gap: calc(var(--s) * 1.2);
+    align-items: flex-start;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: calc(var(--s) * 0.35) solid #0f766e;
+  }
+  .card-icon {
+    font-size: calc(var(--s) * 2.2);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: calc(var(--s) * 0.1);
+  }
+  .card-body h3 {
+    font-size: calc(var(--s) * 1.3);
+    font-weight: 700;
+    color: #0d3b3e;
+    margin-bottom: calc(var(--s) * 0.45);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .card-body p {
+    font-size: calc(var(--s) * 1.1);
+    color: #475569;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  .card-body p strong { color: #1e293b; }
+  .card-body .voice {
+    margin-top: calc(var(--s) * 0.55);
+    font-size: calc(var(--s) * 0.95);
+    font-style: italic;
+    padding-left: calc(var(--s) * 0.7);
+    border-left: 3px solid #5eead4;
+    color: #0f766e;
+    line-height: 1.5;
+  }
+
+  .insight-bar {
+    background: #fffbeb;
+    border: 1.5px solid #fbbf24;
+    border-radius: calc(var(--s) * 0.5);
+    padding: calc(var(--s) * 0.8) calc(var(--s) * 1.2);
+    display: flex;
+    gap: calc(var(--s) * 0.8);
+    align-items: center;
+    font-size: calc(var(--s) * 1.0);
+    color: #78350f;
+    line-height: 1.5;
+  }
+  .insight-bar .icon { font-size: calc(var(--s) * 1.4); flex-shrink: 0; }
+  /* ── File Nav ── */
+  .file-nav {
+    position: fixed;
+    bottom: 2.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 100;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 40px;
+    padding: 7px 14px;
+    backdrop-filter: blur(8px);
+  }
+  .file-nav a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.18s;
+    letter-spacing: 0.04em;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .file-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
+  .file-nav a.active { background: rgba(255,255,255,0.2); color: white; }
+  .file-nav .sep { color: rgba(255,255,255,0.2); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="slide">
+    <div class="left-panel">
+      <div class="page-num">Skill 04</div>
+      <div class="category">Communication</div>
+      <div class="divider"></div>
+      <h1>꼭지 4<span class="accent">부서 간<br>협업·조율</span></h1>
+      <p class="subtitle">칸막이는 구조 문제다.<br>하지만 민원인을 뱅뱅 돌게 하는 건<br>내가 보낸 한 마디일 때가 많다.</p>
+    </div>
+
+    <div class="right-panel">
+      <div class="card">
+        <div class="card-icon">📌</div>
+        <div class="card-body">
+          <h3>떠넘기기를 부르는 건 두루뭉술한 요청</h3>
+          <p><strong>"협조 좀 부탁드려요"</strong>는 거절을 부른다. <strong>"우리가 여기까지 해놨고, 이 부분만 도움이 필요합니다"</strong>처럼 한 일을 보여주고 딱 떨어지게 요청하면 거절을 못 한다.<br>구두 말고 <strong>기록으로</strong>(메일 한 줄, "○○일까지 회신") 남기면 책임이 눈에 보인다.</p>
+          <p class="voice">"두루뭉술 '협조 좀'은 서로 떠넘기다 끝난다. '여기까지 했고 이것만'이면 일이 됐다." — 64세 교육·훈련 사무원</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">👥</div>
+        <div class="card-body">
+          <h3>전화로 안 되면 민원인을 증인 삼아 같은 자리에</h3>
+          <p>전화로 <strong>"기준이 뭐냐"</strong> 물으면 서로 편한 대로 답한다.<br>민원인을 모시고 상대 부서 창구로 <strong>직접 가</strong> 같은 서류를 함께 펴면 <strong>"거기 가서 물어보세요"가 안 나온다.</strong> 책임질 사람이 그 자리에서 지정된다.</p>
+          <p class="voice">"어르신을 증인 삼아 두 부서를 같은 공간에 세우니 그 자리에서 처리 방향이 잡혔다." — 52세 교육·훈련 사무원</p>
+        </div>
+      </div>
+
+      <div class="insight-bar">
+        <span class="icon">⚠️</span>
+        <span><strong>함정 주의:</strong> 부서 칸막이의 상당 부분은 구조 문제다. 개인 소통 스킬로 다 풀린다고 포장하면 <strong>"내가 못해서"</strong>라는 자책만 남는다. 그러나 구조를 못 바꿔도 <strong>요청을 구체화하고 기록으로 남기는 것</strong>은 오늘 당장 개인이 당길 수 있는 레버다.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="file-nav">
+  <a href="day01.html">Day 01</a>
+  <span class="sep">·</span>
+  <a href="day02.html">Day 02</a>
+  <span class="sep">·</span>
+  <a href="day03.html">Day 03</a>
+  <span class="sep">·</span>
+  <a href="day04.html" class="active">Day 04</a>
+</nav>
+</body>
+</html>

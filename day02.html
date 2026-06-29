@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>커뮤니케이션 스킬 02 — 가족 간 소통</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  }
+
+  .stage {
+    position: relative;
+    width: min(100vw, calc(100vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    --s: calc(min(100vw, calc(100vh * 16 / 9)) / 80);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* ── Left panel ── */
+  .left-panel {
+    width: 38%;
+    background: linear-gradient(155deg, #2e1065 0%, #6d28d9 60%, #8b5cf6 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6% 5% 6% 6%;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+  .left-panel::before {
+    content: '';
+    position: absolute;
+    right: -30%; top: -20%;
+    width: 70%; height: 70%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .left-panel::after {
+    content: '';
+    position: absolute;
+    right: -10%; bottom: -15%;
+    width: 50%; height: 50%;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .page-num {
+    font-size: calc(var(--s) * 0.85);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  .category {
+    font-size: calc(var(--s) * 1);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: calc(var(--s) * 0.8);
+    position: relative; z-index: 1;
+  }
+  .divider {
+    width: 48px; height: 4px;
+    border-radius: 2px;
+    background: #c4b5fd;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  h1 {
+    font-size: calc(var(--s) * 2.6);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: calc(var(--s) * 1.4);
+    position: relative; z-index: 1;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent {
+    display: block;
+    font-size: calc(var(--s) * 3.4);
+    color: #c4b5fd;
+  }
+  .subtitle {
+    font-size: calc(var(--s) * 1.15);
+    line-height: 1.65;
+    opacity: 0.82;
+    position: relative; z-index: 1;
+    font-weight: 400;
+  }
+
+  /* ── Right panel ── */
+  .right-panel {
+    flex: 1;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 5.5% 4% 5%;
+    gap: 3%;
+  }
+
+  .card {
+    background: white;
+    border-radius: calc(var(--s) * 0.6);
+    padding: calc(var(--s) * 1.1) calc(var(--s) * 1.4);
+    display: flex;
+    gap: calc(var(--s) * 1.2);
+    align-items: flex-start;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: calc(var(--s) * 0.35) solid #6d28d9;
+  }
+  .card-icon {
+    font-size: calc(var(--s) * 2.2);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: calc(var(--s) * 0.1);
+  }
+  .card-body h3 {
+    font-size: calc(var(--s) * 1.3);
+    font-weight: 700;
+    color: #2e1065;
+    margin-bottom: calc(var(--s) * 0.45);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .card-body p {
+    font-size: calc(var(--s) * 1.1);
+    color: #475569;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  .card-body p strong { color: #1e293b; }
+
+  .insight-bar {
+    background: #fffbeb;
+    border: 1.5px solid #fbbf24;
+    border-radius: calc(var(--s) * 0.5);
+    padding: calc(var(--s) * 0.8) calc(var(--s) * 1.2);
+    display: flex;
+    gap: calc(var(--s) * 0.8);
+    align-items: center;
+    font-size: calc(var(--s) * 1.0);
+    color: #78350f;
+    line-height: 1.5;
+  }
+  .insight-bar .icon { font-size: calc(var(--s) * 1.4); flex-shrink: 0; }
+
+  /* ── File Nav ── */
+  .file-nav {
+    position: fixed;
+    bottom: 2.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 100;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 40px;
+    padding: 7px 14px;
+    backdrop-filter: blur(8px);
+  }
+  .file-nav a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.18s;
+    letter-spacing: 0.04em;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .file-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
+  .file-nav a.active { background: rgba(255,255,255,0.2); color: white; }
+  .file-nav .sep { color: rgba(255,255,255,0.2); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="slide">
+    <div class="left-panel">
+      <div class="page-num">Skill 02</div>
+      <div class="category">Family Communication</div>
+      <div class="divider"></div>
+      <h1>꼭지 2<span class="accent">가족 간<br>소통의 핵심</span></h1>
+      <p class="subtitle">"말하지 않아도 알겠지"라는<br>기대가 가장 큰 장벽.<br>듣고, 말하고, 읽어야 한다.</p>
+    </div>
+
+    <div class="right-panel">
+      <div class="card">
+        <div class="card-icon">👂</div>
+        <div class="card-body">
+          <h3>경청 — 내 방식이 아닌 상대의 속도로</h3>
+          <p>말이 끝나기 전에 대답하거나, 듣는 척하면서 반박을 준비하면 대화가 막힌다.<br><strong>"어떻게 생각해?"</strong> 한 마디를 먼저 묻는 것이 세대 간 벽을 낮추는 출발점이다.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <div class="card-body">
+          <h3>솔직한 자기표현 — "괜찮아"는 전달이 아니다</h3>
+          <p>책임감과 눈치 때문에 억누른 감정은 결국 더 큰 갈등이 된다.<br>힘들 때 <strong>"나는 지금 힘들다"</strong>고 말하는 것 자체가 가족 간 신뢰를 만드는 기술이다.</p>
+        </div>
+      </div>
+
+      <div class="insight-bar">
+        <span class="icon">🤝</span>
+        <span><strong>비언어적 공감:</strong> 말이 없어도 작은 표정 변화, <strong>"그래, 힘들었겠네"</strong> 한 마디, 어깨에 얹은 손 하나가 <strong>"당신을 보고 있다"</strong>는 가장 강한 신호다.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="file-nav">
+  <a href="day01.html">Day 01</a>
+  <span class="sep">·</span>
+  <a href="day02.html" class="active">Day 02</a>
+  <span class="sep">·</span>
+  <a href="day03.html">Day 03</a>
+  <span class="sep">·</span>
+  <a href="day04.html">Day 04</a>
+</nav>
+</body>
+</html>

@@ -1,0 +1,4 @@
+.claude/
+.playwright-mcp/
+_workspace/
+.harness-curator-state.json

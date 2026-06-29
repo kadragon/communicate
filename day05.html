@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>커뮤니케이션 스킬 05 — 상향 보고</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  }
+
+  .stage {
+    position: relative;
+    width: min(100vw, calc(100vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    --s: calc(min(100vw, calc(100vh * 16 / 9)) / 80);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* ── Left panel ── */
+  .left-panel {
+    width: 38%;
+    background: linear-gradient(155deg, #431407 0%, #b45309 60%, #f59e0b 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6% 5% 6% 6%;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+  .left-panel::before {
+    content: '';
+    position: absolute;
+    right: -30%; top: -20%;
+    width: 70%; height: 70%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .left-panel::after {
+    content: '';
+    position: absolute;
+    right: -10%; bottom: -15%;
+    width: 50%; height: 50%;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .page-num {
+    font-size: calc(var(--s) * 0.85);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  .category {
+    font-size: calc(var(--s) * 1);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: calc(var(--s) * 0.8);
+    position: relative; z-index: 1;
+  }
+  .divider {
+    width: 48px; height: 4px;
+    border-radius: 2px;
+    background: #fcd34d;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  h1 {
+    font-size: calc(var(--s) * 2.6);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: calc(var(--s) * 1.4);
+    position: relative; z-index: 1;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent {
+    display: block;
+    font-size: calc(var(--s) * 3.4);
+    color: #fcd34d;
+  }
+  .subtitle {
+    font-size: calc(var(--s) * 1.15);
+    line-height: 1.65;
+    opacity: 0.82;
+    position: relative; z-index: 1;
+    font-weight: 400;
+  }
+
+  /* ── Right panel ── */
+  .right-panel {
+    flex: 1;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 5.5% 4% 5%;
+    gap: 3%;
+  }
+
+  .card {
+    background: white;
+    border-radius: calc(var(--s) * 0.6);
+    padding: calc(var(--s) * 1.1) calc(var(--s) * 1.4);
+    display: flex;
+    gap: calc(var(--s) * 1.2);
+    align-items: flex-start;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: calc(var(--s) * 0.35) solid #b45309;
+  }
+  .card-icon {
+    font-size: calc(var(--s) * 2.2);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: calc(var(--s) * 0.1);
+  }
+  .card-body h3 {
+    font-size: calc(var(--s) * 1.3);
+    font-weight: 700;
+    color: #431407;
+    margin-bottom: calc(var(--s) * 0.45);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .card-body p {
+    font-size: calc(var(--s) * 1.1);
+    color: #475569;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  .card-body p strong { color: #1e293b; }
+  .card-body .voice {
+    margin-top: calc(var(--s) * 0.55);
+    font-size: calc(var(--s) * 0.95);
+    font-style: italic;
+    padding-left: calc(var(--s) * 0.7);
+    border-left: 3px solid #fcd34d;
+    color: #92400e;
+    line-height: 1.5;
+  }
+
+  .insight-bar {
+    background: #fffbeb;
+    border: 1.5px solid #fbbf24;
+    border-radius: calc(var(--s) * 0.5);
+    padding: calc(var(--s) * 0.8) calc(var(--s) * 1.2);
+    display: flex;
+    gap: calc(var(--s) * 0.8);
+    align-items: center;
+    font-size: calc(var(--s) * 1.0);
+    color: #78350f;
+    line-height: 1.5;
+  }
+  .insight-bar .icon { font-size: calc(var(--s) * 1.4); flex-shrink: 0; }
+
+  /* ── File Nav ── */
+  .file-nav {
+    position: fixed;
+    bottom: 2.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 100;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 40px;
+    padding: 7px 14px;
+    backdrop-filter: blur(8px);
+  }
+  .file-nav a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.18s;
+    letter-spacing: 0.04em;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .file-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
+  .file-nav a.active { background: rgba(255,255,255,0.2); color: white; }
+  .file-nav .sep { color: rgba(255,255,255,0.2); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="slide">
+    <div class="left-panel">
+      <div class="page-num">Skill 05</div>
+      <div class="category">Communication</div>
+      <div class="divider"></div>
+      <h1>꼭지 5<span class="accent">상향<br>보고</span></h1>
+      <p class="subtitle">상사가 원하는 건<br>완벽한 보고서가 아니다.<br>빠른 판단 재료다.</p>
+    </div>
+
+    <div class="right-panel">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <div class="card-body">
+          <h3>결론 먼저, 3개로 자른다</h3>
+          <p>보고의 시작은 배경 설명이 아니다. <strong>"이 건은 세 가지가 문제입니다 — 그중 이것이 제일 급합니다"</strong>로 시작하면 상사는 배경을 묻기 전에 판단부터 한다.<br>상황·결론·필요한 결정, 이 3가지 안에 압축하고 <strong>나머지는 질문받을 때 꺼낸다.</strong></p>
+          <p class="voice">"상위 3개만, 우선순위 명확하게, 개선안 초안까지 준비해서 가면 상사가 의사결정 중심으로 움직인다." — 45세 지방행정 사무원</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-body">
+          <h3>나쁜 소식은 늦추지 말고 먼저</h3>
+          <p>불편한 소식을 완성본 만들고 보고하다 보면 다른 경로로 먼저 새기 마련이다. <strong>신뢰가 2배로 깎인다.</strong><br><strong>"지금 파악 중입니다 — 내일까지 결론 드리겠습니다"</strong>가 침묵 끝의 완성본보다 낫다. 3단계 구조는 보고 이후 후속 대화의 흐름으로 쓰면 된다.</p>
+          <p class="voice">"부정적인 소식이 있어도 기분을 살피다 전달을 미루면, 나중에 알려졌을 때 신뢰 문제가 생겼어요." — 41세 교육 및 훈련 사무원</p>
+        </div>
+      </div>
+
+      <div class="insight-bar">
+        <span class="icon">⚠️</span>
+        <span><strong>함정 주의:</strong> 보고서가 아무리 정교해도 상사는 "이 사람 말을 믿을 수 있나?"를 먼저 본다. 형식 완벽 ≠ 신뢰. 일관성 있는 선보고와 후속 처리가 쌓여야 <strong>보고 스킬이 효과를 낸다.</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="file-nav">
+  <a href="day01.html">Day 01</a>
+  <span class="sep">·</span>
+  <a href="day02.html">Day 02</a>
+  <span class="sep">·</span>
+  <a href="day03.html">Day 03</a>
+  <span class="sep">·</span>
+  <a href="day04.html">Day 04</a>
+  <span class="sep">·</span>
+  <a href="day05.html" class="active">Day 05</a>
+</nav>
+</body>
+</html>

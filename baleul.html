@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LG 발을씻자 — 만능 활용 가이드</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card2: #22263a;
+    --accent: #f97316;
+    --accent2: #fb923c;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: rgba(249,115,22,0.25);
+    --warn: #ef4444;
+    --warn-bg: rgba(239,68,68,0.1);
+  }
+
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* ── 헤더 ── */
+  .hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(249,115,22,0.15), transparent);
+    pointer-events: none;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(249,115,22,0.15);
+    border: 1px solid var(--border);
+    color: var(--accent2);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero .sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ── 제품 소개 ── */
+  .product-strip {
+    display: flex;
+    gap: 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .product-strip .label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem; }
+  .product-strip .val { font-size: 0.95rem; font-weight: 600; }
+  .divider-v { width: 1px; background: var(--border); align-self: stretch; min-height: 40px; }
+
+  /* ── 섹션 타이틀 ── */
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── 카드 그리드 ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .card:hover {
+    border-color: var(--border);
+    transform: translateY(-2px);
+  }
+
+  .card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .card .tip {
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(249,115,22,0.08);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.8rem;
+    color: var(--accent2);
+    line-height: 1.5;
+  }
+  .card.highlight { border-color: rgba(249,115,22,0.35); background: var(--card2); }
+
+  /* ── 원리 설명 박스 ── */
+  .mechanism {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .mech-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    font-size: 0.875rem;
+  }
+  .mech-row .key {
+    min-width: 90px;
+    font-weight: 700;
+    color: var(--accent2);
+    flex-shrink: 0;
+  }
+  .mech-row .desc { color: var(--muted); line-height: 1.6; }
+
+  /* ── 경고 배너 ── */
+  .warning {
+    background: var(--warn-bg);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .warning h4 {
+    color: var(--warn);
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .warning ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .warning li {
+    font-size: 0.85rem;
+    color: #fca5a5;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .warning li::before { content: '–'; position: absolute; left: 0; color: var(--warn); }
+
+  /* ── 출처 ── */
+  .sources {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 1.25rem;
+    margin-top: 1rem;
+  }
+  .sources h4 { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.6rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .sources ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .sources a { color: #64748b; font-size: 0.8rem; text-decoration: none; }
+  .sources a:hover { color: var(--accent2); text-decoration: underline; }
+
+  /* ── 페이지네이션 nav (프로젝트 스타일 통일) ── */
+  .pill-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .pill-nav a {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .pill-nav a:hover { color: var(--accent2); border-color: var(--border); }
+  .pill-nav a.active { color: var(--accent); border-color: var(--accent); background: rgba(249,115,22,0.1); }
+
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: 1fr; }
+    .product-strip { flex-direction: column; }
+    .divider-v { width: 100%; height: 1px; min-height: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 헤더 -->
+  <div class="hero">
+    <div class="badge">번외 · 살림 꿀템 탐구</div>
+    <h1>LG 발을씻자,<br><span>발 말고도 다 돼요</span></h1>
+    <p class="sub">온더바디 풋샴푸의 예상치 못한 만능 활용법 총정리</p>
+  </div>
+
+  <!-- 제품 기본 스펙 -->
+  <div class="product-strip">
+    <div>
+      <div class="label">브랜드</div>
+      <div class="val">LG생활건강 · 온더바디</div>
+    </div>
+    <div class="divider-v"></div>
+    <div>
+      <div class="label">카테고리</div>
+      <div class="val">풋샴푸 (스프레이형)</div>
+    </div>
+    <div class="divider-v"></div>
+    <div>
+      <div class="label">공식 기능</div>
+      <div class="val">각질 완화 · 탈취 · 항균 99%</div>
+    </div>
+    <div class="divider-v"></div>
+    <div>
+      <div class="label">핵심 성분</div>
+      <div class="val">계면활성제 · 비니거(식초)</div>
+    </div>
+  </div>
+
+  <!-- 신체 활용 -->
+  <div class="section-title">🧴 신체 활용</div>
+  <div class="grid" style="margin-bottom: 2rem;">
+    <div class="card highlight">
+      <span class="icon">👃</span>
+      <h3>겨드랑이 암내 제거</h3>
+      <p>샤워 시 겨드랑이에 스프레이 후 문질러 헹구면 탈취 효과. 강력한 항균·탈취 성분이 냄새 원인균을 잡아줌.</p>
+      <div class="tip">💬 "발을씻자로 겨드랑이 씻으니 곁땀냄새 안 남" — 온라인 커뮤니티 다수 후기</div>
+    </div>
+    <div class="card">
+      <span class="icon">🙄</span>
+      <h3>쥐젖(연성 섬유종)</h3>
+      <p>피부 돌출 부위에 반복 도포했더니 효과를 봤다는 커뮤니티 후기 다수. 단, 의학적으로 검증된 용법은 아님.</p>
+      <div class="tip">⚠️ 피부 자극 가능성 있으므로 패치 테스트 필수</div>
+    </div>
+    <div class="card">
+      <span class="icon">🌬️</span>
+      <h3>공기 탈취·방향</h3>
+      <p>방에 가볍게 스프레이하면 향기 나면서 탈취. 신발장·화장실·차량 내부에도 활용.</p>
+    </div>
+  </div>
+
+  <!-- 청소 활용 -->
+  <div class="section-title">🧹 청소 활용</div>
+  <div class="grid" style="margin-bottom: 2rem;">
+    <div class="card">
+      <span class="icon">🚿</span>
+      <h3>화장실 수전·세면대</h3>
+      <p>뿌리고 솔로 살짝 문지르면 물 얼룩·비누 찌꺼기 제거. 수전이 반짝반짝해짐.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🍄</span>
+      <h3>곰팡이 제거</h3>
+      <p>화장실 줄눈·타일 곰팡이에 뿌리고 솔로 문지르면 효과. 항균 성분이 재발도 억제.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🍳</span>
+      <h3>가스레인지·레인지후드 기름때</h3>
+      <p>기름진 부위에 뿌리고 잠시 둔 뒤 닦으면 초벌 세정 효과. 계면활성제가 유분 분해.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🚲</span>
+      <h3>자전거·운동화 세차</h3>
+      <p>진흙·기름 오염된 자전거 체인·프레임에 뿌리고 솔질 후 헹굼. 운동화 밑창 청소에도.</p>
+    </div>
+  </div>
+
+  <!-- 세탁·얼룩 제거 -->
+  <div class="section-title">👕 세탁 · 얼룩 제거</div>
+  <div class="grid" style="margin-bottom: 2rem;">
+    <div class="card highlight">
+      <span class="icon">🩸</span>
+      <h3>핏자국</h3>
+      <p>묻은 즉시 뿌리고 10~20분 후 찬물로 헹구면 효과 탁월. 묵은 핏자국도 미지근한 물에 불리면 상당 부분 제거.</p>
+    </div>
+    <div class="card">
+      <span class="icon">☕</span>
+      <h3>커피·음식 얼룩</h3>
+      <p>얼룩 부위에 뿌리고 손으로 살살 문질러 세탁기 돌리면 대부분 제거.</p>
+      <div class="tip">💬 "뿌리고 세탁기 돌렸더니 다 사라졌다" — 디시인사이드 후기</div>
+    </div>
+    <div class="card">
+      <span class="icon">🐾</span>
+      <h3>반려동물 오줌·털 냄새</h3>
+      <p>패브릭 소파·카펫에 뿌리고 두드려 닦으면 탈취 효과. 세탁 가능한 소재는 세탁기 투입.</p>
+    </div>
+    <div class="card">
+      <span class="icon">👔</span>
+      <h3>겨드랑이 누런 자국 (흰 옷)</h3>
+      <p>변색 부위에 뿌리고 미지근한 물에 2시간 불린 뒤 세탁기. 비니거(식초) 성분이 산성 표백 역할.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🍽️</span>
+      <h3>기름진 설거지 초벌</h3>
+      <p>고기구이 후 기름 그릇에 뿌리고 30초 두면 기름이 뜸. 초벌 세척 후 본 세척하면 깔끔.</p>
+    </div>
+  </div>
+
+  <!-- 해충 퇴치 -->
+  <div class="section-title">🪲 해충 퇴치</div>
+  <div class="grid" style="margin-bottom: 2rem;">
+    <div class="card highlight">
+      <span class="icon">🪳</span>
+      <h3>바퀴벌레 퇴치</h3>
+      <p>바퀴벌레에게 직접 분사하면 수 분 내 사망. 계면활성제가 외피 왁스층을 녹여 피부 호흡을 막아 질식시킴.</p>
+      <div class="tip">💡 살충제보다 독성 낮고 냄새 없음 — 주방에서 안심 사용 가능</div>
+    </div>
+    <div class="card">
+      <span class="icon">🐜</span>
+      <h3>기타 소형 해충</h3>
+      <p>개미·날벌레 등 외골격 곤충에도 동일 원리로 효과 보고. 단, 큰 해충엔 시간이 걸릴 수 있음.</p>
+    </div>
+  </div>
+
+  <!-- 효과 원리 -->
+  <div class="section-title">🔬 왜 이렇게 다 잘 돼?</div>
+  <div class="mechanism">
+    <div class="mech-row">
+      <span class="key">계면활성제</span>
+      <span class="desc">물과 기름 사이를 연결하는 성분. 피지·각질·기름때·바퀴벌레 왁스층 등 유분성 오염을 모두 분해. 일반 샴푸보다 세정력이 강하고 거품이 풍부해 넓은 면적에 빠르게 작용.</span>
+    </div>
+    <div class="mech-row">
+      <span class="key">비니거(식초)</span>
+      <span class="desc">약산성 환경이 세균 억제 + 알칼리성 찌든때 분해. 누런 땀 얼룩(알칼리성)을 산성으로 중화해 표백 효과. 탈취 역할도 겸함.</span>
+    </div>
+    <div class="mech-row">
+      <span class="key">항균 성분</span>
+      <span class="desc">발 냄새 원인균 제거용으로 배합된 성분이 겨드랑이·공기 중 세균에도 동일하게 작용.</span>
+    </div>
+    <div class="mech-row">
+      <span class="key">스프레이 포밍</span>
+      <span class="desc">마이크로 거품이 오염 부위에 밀착해 성분이 표면에 오래 머묾 → 짧은 시간에도 세정·살균 효과.</span>
+    </div>
+  </div>
+
+  <!-- 주의사항 -->
+  <div class="warning">
+    <h4>⚠️ 사용 전 반드시 확인</h4>
+    <ul>
+      <li>LG생활건강 공식 입장: "용도 외 사용 자제" 권고. 부작용 발생 시 회사 책임 없음.</li>
+      <li>계면활성제는 경구 섭취 위험 → <strong>식기·조리 도구 직접 세척 금지</strong></li>
+      <li>쥐젖 제거는 의학적으로 검증된 용법 아님 → 피부과 상담 권장</li>
+      <li>피부 민감자는 겨드랑이 등 민감 부위 사용 전 패치 테스트 필수</li>
+      <li>전문 청소·제균제와 세정력 차이 있음 — 만능은 아님, 보조 수단으로 활용</li>
+    </ul>
+  </div>
+
+  <!-- 출처 -->
+  <div class="sources">
+    <h4>출처</h4>
+    <ul>
+      <li><a href="https://namu.wiki/w/%EB%B0%9C%EC%9D%84%EC%94%BB%EC%9E%90" target="_blank">나무위키 — 발을씻자</a></li>
+      <li><a href="https://www.ngetnews.com/news/articleView.html?idxno=428930" target="_blank">ngetnews — "이건 만능이야"…LG생건 풋케어 '발을씻자' 열풍</a></li>
+      <li><a href="https://www.newsis.com/view/NISX20240628_0002791123" target="_blank">뉴시스 — 풋샴푸인데 겨드랑이에도?…'발친님' 덕에 매출 폭증</a></li>
+      <li><a href="https://www.clien.net/service/board/park/19042422" target="_blank">클리앙 — 발을씻자가 바퀴벌레까지 잘 잡네요</a></li>
+      <li><a href="https://www.clien.net/service/board/park/18431627" target="_blank">클리앙 — 제가 쓰는 곳 정리해봤습니다</a></li>
+      <li><a href="https://theqoo.net/square/3281131561" target="_blank">더쿠 — 발을씻자를 뿌리면 바퀴벌레가 죽는 이유</a></li>
+      <li><a href="https://v.daum.net/v/URx99uj431" target="_blank">픽데일리 — 만능 살림템 풋샴푸의 놀라운 사용법 5</a></li>
+    </ul>
+  </div>
+
+  <!-- 네비게이션 (프로젝트 day*.html 파일과 통일) -->
+  <nav class="pill-nav">
+    <a href="day01.html">Day 01</a>
+    <a href="day02.html">Day 02</a>
+    <a href="day03.html">Day 03</a>
+    <a href="baleul.html" class="active">번외</a>
+  </nav>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>커뮤니케이션 스킬 01 — 명확하고 정확한 표현</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  }
+
+  .stage {
+    position: relative;
+    width: min(100vw, calc(100vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    --s: calc(min(100vw, calc(100vh * 16 / 9)) / 80);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* ── Left panel ── */
+  .left-panel {
+    width: 38%;
+    background: linear-gradient(155deg, #0f3460 0%, #1565c0 60%, #1e88e5 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6% 5% 6% 6%;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+  .left-panel::before {
+    content: '';
+    position: absolute;
+    right: -30%; top: -20%;
+    width: 70%; height: 70%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .left-panel::after {
+    content: '';
+    position: absolute;
+    right: -10%; bottom: -15%;
+    width: 50%; height: 50%;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .page-num {
+    font-size: calc(var(--s) * 0.85);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  .category {
+    font-size: calc(var(--s) * 1);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: calc(var(--s) * 0.8);
+    position: relative; z-index: 1;
+  }
+  .divider {
+    width: 48px; height: 4px;
+    border-radius: 2px;
+    background: #90caf9;
+    margin-bottom: calc(var(--s) * 1.2);
+    position: relative; z-index: 1;
+  }
+  h1 {
+    font-size: calc(var(--s) * 2.6);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: calc(var(--s) * 1.4);
+    position: relative; z-index: 1;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent {
+    display: block;
+    font-size: calc(var(--s) * 3.4);
+    color: #90caf9;
+  }
+  .subtitle {
+    font-size: calc(var(--s) * 1.15);
+    line-height: 1.65;
+    opacity: 0.82;
+    position: relative; z-index: 1;
+    font-weight: 400;
+  }
+
+  /* ── Right panel ── */
+  .right-panel {
+    flex: 1;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5% 5.5% 4% 5%;
+    gap: 3%;
+  }
+
+  .card {
+    background: white;
+    border-radius: calc(var(--s) * 0.6);
+    padding: calc(var(--s) * 1.1) calc(var(--s) * 1.4);
+    display: flex;
+    gap: calc(var(--s) * 1.2);
+    align-items: flex-start;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: calc(var(--s) * 0.35) solid #1565c0;
+  }
+  .card-icon {
+    font-size: calc(var(--s) * 2.2);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: calc(var(--s) * 0.1);
+  }
+  .card-body h3 {
+    font-size: calc(var(--s) * 1.3);
+    font-weight: 700;
+    color: #0f3460;
+    margin-bottom: calc(var(--s) * 0.45);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .card-body p {
+    font-size: calc(var(--s) * 1.1);
+    color: #475569;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  .card-body p strong { color: #1e293b; }
+  .card-body .voice {
+    margin-top: calc(var(--s) * 0.55);
+    font-size: calc(var(--s) * 0.95);
+    font-style: italic;
+    padding-left: calc(var(--s) * 0.7);
+    border-left: 3px solid #90caf9;
+    color: #1565c0;
+    line-height: 1.5;
+  }
+
+  .insight-bar {
+    background: #fffbeb;
+    border: 1.5px solid #fbbf24;
+    border-radius: calc(var(--s) * 0.5);
+    padding: calc(var(--s) * 0.8) calc(var(--s) * 1.2);
+    display: flex;
+    gap: calc(var(--s) * 0.8);
+    align-items: center;
+    font-size: calc(var(--s) * 1.0);
+    color: #78350f;
+    line-height: 1.5;
+  }
+  .insight-bar .icon { font-size: calc(var(--s) * 1.4); flex-shrink: 0; }
+  /* ── File Nav ── */
+  .file-nav {
+    position: fixed;
+    bottom: 2.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 100;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 40px;
+    padding: 7px 14px;
+    backdrop-filter: blur(8px);
+  }
+  .file-nav a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.18s;
+    letter-spacing: 0.04em;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .file-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
+  .file-nav a.active { background: rgba(255,255,255,0.2); color: white; }
+  .file-nav .sep { color: rgba(255,255,255,0.2); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="slide">
+    <div class="left-panel">
+      <div class="page-num">Skill 01</div>
+      <div class="category">Communication</div>
+      <div class="divider"></div>
+      <h1>꼭지 1<span class="accent">명확하고<br>정확한 표현</span></h1>
+      <p class="subtitle">모호한 말 한마디가<br>3개월 갈등이 된다.<br>오해를 지우는 것이 출발점.</p>
+    </div>
+
+    <div class="right-panel">
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <div class="card-body">
+          <h3>공문·이메일: 한 글자가 법적 의미를 바꾼다</h3>
+          <p>쉼표 위치 하나가 <strong>"이 경우에만"</strong>과 <strong>"모든 경우에"</strong>를 갈랐다.<br>작성 후 반드시 점검: <strong>"상대방이 다르게 읽을 여지가 없는가?"</strong></p>
+          <p class="voice">"오타 없는 공문 하나가 3개월 분쟁을 2시간에 해결했다." — 63세 공공행정 전문가</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🗣️</div>
+        <div class="card-body">
+          <h3>구두 지시·인수인계: 추상어 금지, 조건을 명시</h3>
+          <p><strong>"꼼꼼히 해"</strong>는 전달이 아니다. <strong>"법령 제5조 2항까지 대조해서"</strong>라고 해야 상대가 움직인다.<br>인수인계도 <strong>"상황에 따라 판단"</strong>은 최악 — 경우를 나눠 구체적으로 쓴다.</p>
+          <p class="voice">"구체적 지시 전후 결과가 달랐다. 추상어는 의존만 만든다." — 29세 행정사무원</p>
+        </div>
+      </div>
+
+      <div class="insight-bar">
+        <span class="icon">⚠️</span>
+        <span><strong>함정 주의:</strong> 조직 내 모호한 지시는 무능이 아니라 책임 회피 전략일 수 있다. 명확화는 기술이지만, 상대가 명확해지길 원하지 않는 구조도 직시해야 한다.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="file-nav">
+  <a href="day01.html" class="active">Day 01</a>
+  <span class="sep">·</span>
+  <a href="day02.html">Day 02</a>
+  <span class="sep">·</span>
+  <a href="day03.html">Day 03</a>
+  <span class="sep">·</span>
+  <a href="day04.html">Day 04</a>
+</nav>
+</body>
+</html>
