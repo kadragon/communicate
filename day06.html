@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>커뮤니케이션 스킬 02 — 가족 간 소통</title>
+<title>커뮤니케이션 스킬 06 — 회의 효율화</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,7 +35,7 @@
   /* ── Left panel ── */
   .left-panel {
     width: 38%;
-    background: linear-gradient(155deg, #2e1065 0%, #6d28d9 60%, #8b5cf6 100%);
+    background: linear-gradient(155deg, #1e1b4b 0%, #4338ca 60%, #818cf8 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,7 +81,7 @@
   .divider {
     width: 48px; height: 4px;
     border-radius: 2px;
-    background: #c4b5fd;
+    background: #a5b4fc;
     margin-bottom: calc(var(--s) * 1.2);
     position: relative; z-index: 1;
   }
@@ -96,7 +96,7 @@
   h1 .accent {
     display: block;
     font-size: calc(var(--s) * 3.4);
-    color: #c4b5fd;
+    color: #a5b4fc;
   }
   .subtitle {
     font-size: calc(var(--s) * 1.15);
@@ -125,7 +125,7 @@
     gap: calc(var(--s) * 1.2);
     align-items: flex-start;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    border-left: calc(var(--s) * 0.35) solid #6d28d9;
+    border-left: calc(var(--s) * 0.35) solid #4338ca;
   }
   .card-icon {
     font-size: calc(var(--s) * 2.2);
@@ -136,7 +136,7 @@
   .card-body h3 {
     font-size: calc(var(--s) * 1.3);
     font-weight: 700;
-    color: #2e1065;
+    color: #1e1b4b;
     margin-bottom: calc(var(--s) * 0.45);
     letter-spacing: -0.01em;
     line-height: 1.3;
@@ -148,6 +148,15 @@
     font-weight: 400;
   }
   .card-body p strong { color: #1e293b; }
+  .card-body .voice {
+    margin-top: calc(var(--s) * 0.55);
+    font-size: calc(var(--s) * 0.95);
+    font-style: italic;
+    padding-left: calc(var(--s) * 0.7);
+    border-left: 3px solid #a5b4fc;
+    color: #4338ca;
+    line-height: 1.5;
+  }
 
   .insight-bar {
     background: #fffbeb;
@@ -199,33 +208,35 @@
 <div class="stage">
   <div class="slide">
     <div class="left-panel">
-      <div class="page-num">Skill 02</div>
-      <div class="category">Family Communication</div>
+      <div class="page-num">Skill 06</div>
+      <div class="category">Communication</div>
       <div class="divider"></div>
-      <h1>꼭지 2<span class="accent">가족 간<br>소통의 핵심</span></h1>
-      <p class="subtitle">"말하지 않아도 알겠지"라는<br>기대가 가장 큰 장벽.<br>듣고, 말하고, 읽어야 한다.</p>
+      <h1>꼭지 6<span class="accent">회의<br>효율화</span></h1>
+      <p class="subtitle">회의가 긴 게 문제가 아니다.<br>끝나고 아무도 뭘 해야 하는지<br>모르는 게 문제다.</p>
     </div>
 
     <div class="right-panel">
       <div class="card">
-        <div class="card-icon">👂</div>
+        <div class="card-icon">📋</div>
         <div class="card-body">
-          <h3>경청 — 내 방식이 아닌 상대의 속도로</h3>
-          <p>말이 끝나기 전에 대답하거나, 듣는 척하면서 반박을 준비하면 대화가 막힌다.<br><strong>"어떻게 생각해?"</strong> 한 마디를 먼저 묻는 것이 세대 간 벽을 낮추는 출발점이다.</p>
+          <h3>회의 전 — 안건+목표+기대 결론 미리 공유</h3>
+          <p>"무슨 얘기 할지"가 아니라 <strong>"무엇을 결정해야 하는지"</strong>를 회의 전에 공유한다. 1주일 전이 이상이지만 최소 하루 전, 안건·목표·기대 결론 세 가지면 충분하다.<br>공유 전에 한 줄만 추가하면 효과가 다르다 — <strong>"이 안건에서 현장(또는 다른 부서)이 막힐 지점이 뭔지"</strong> 예측을 함께 넣는 것.</p>
+          <p class="voice">"사전에 안건과 자료를 배포한 회의는 1시간 안에 끝나고 다음 날부터 일이 움직였다." — 53세 교육 및 훈련 사무원</p>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-icon">💬</div>
+        <div class="card-icon">⏱️</div>
         <div class="card-body">
-          <h3>솔직한 자기표현 — "괜찮아"는 전달이 아니다</h3>
-          <p>책임감과 눈치 때문에 억누른 감정은 결국 더 큰 갈등이 된다.<br>힘들 때 <strong>"나는 지금 힘들다"</strong>고 말하는 것 자체가 가족 간 신뢰를 만드는 기술이다.</p>
+          <h3>회의 끝 3분 — 결정·담당자·마감 구두+기록</h3>
+          <p>자리를 파하기 전 3분: <strong>"결정된 것은 OO, ○○ 씨가 ○월 ○일까지, 이견 있으면 24시간 내에"</strong>라고 구두로 한 번 정리하고 메시지로 공유한다.<br>표나 사진으로 공유할 때는 반드시 <strong>이견 채널을 함께 열어둔다.</strong> 빠른 공유가 이견 제기를 막는 도구가 되면 안 된다.</p>
+          <p class="voice">"결정사항을 표로 만들어 그 자리에서 공유한 후론 '그 얘기가 그 얘기였나요?'가 없어졌다." — 36세 교육 및 훈련 사무원</p>
         </div>
       </div>
 
       <div class="insight-bar">
-        <span class="icon">🤝</span>
-        <span><strong>비언어적 공감:</strong> 말이 없어도 작은 표정 변화, <strong>"그래, 힘들었겠네"</strong> 한 마디, 어깨에 얹은 손 하나가 <strong>"당신을 보고 있다"</strong>는 가장 강한 신호다.</span>
+        <span class="icon">⚠️</span>
+        <span><strong>함정 주의:</strong> 안건 배포·결론 기록이 완벽해도 참석자들이 다른 언어로 읽으면 회의 후 현장은 딴 방향으로 움직인다. 형식은 기록을 해결하지만 <strong>번역은 해결 못 한다.</strong> 안건 공유 전, 서로 다른 부서·현장이 "이 결정에서 다르게 이해할 지점"을 한 줄 예측하는 습관이 회의 질을 바꾼다.</span>
       </div>
     </div>
   </div>
@@ -234,7 +245,7 @@
 <nav class="file-nav">
   <a href="day01.html">Day 01</a>
   <span class="sep">·</span>
-  <a href="day02.html" class="active">Day 02</a>
+  <a href="day02.html">Day 02</a>
   <span class="sep">·</span>
   <a href="day03.html">Day 03</a>
   <span class="sep">·</span>
@@ -242,7 +253,7 @@
   <span class="sep">·</span>
   <a href="day05.html">Day 05</a>
   <span class="sep">·</span>
-  <a href="day06.html">Day 06</a>
+  <a href="day06.html" class="active">Day 06</a>
 </nav>
 </body>
 </html>
